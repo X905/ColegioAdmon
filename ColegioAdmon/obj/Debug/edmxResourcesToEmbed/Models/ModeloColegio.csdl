@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Db_ColegioModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Tbl_Autenticacion">
+    <Key>
+      <PropertyRef Name="Id_Autenticacion" />
+    </Key>
+    <Property Name="Id_Autenticacion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Usuario" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Clave" Type="String" MaxLength="64" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="Id_Usuario" Type="Int32" Nullable="false" />
+    <Property Name="Id_Rol" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Tbl_Rol" Relationship="Self.FK_Tbl_Autenticacion_Tbl_Rol" FromRole="Tbl_Autenticacion" ToRole="Tbl_Rol" />
+    <NavigationProperty Name="Tbl_Usuario" Relationship="Self.FK_Tbl_Autenticacion_Tbl_Usuario" FromRole="Tbl_Autenticacion" ToRole="Tbl_Usuario" />
+  </EntityType>
+  <EntityType Name="Tbl_Rol">
+    <Key>
+      <PropertyRef Name="Id_Rol" />
+    </Key>
+    <Property Name="Id_Rol" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Rol" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Tbl_Autenticacion" Relationship="Self.FK_Tbl_Autenticacion_Tbl_Rol" FromRole="Tbl_Rol" ToRole="Tbl_Autenticacion" />
+  </EntityType>
+  <EntityType Name="Tbl_Usuario">
+    <Key>
+      <PropertyRef Name="Id_Usuario" />
+    </Key>
+    <Property Name="Id_Usuario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NombreUsuario" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ApellidoUsuario" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Sexo" Type="Boolean" Nullable="false" />
+    <Property Name="Edad" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Tbl_Autenticacion" Relationship="Self.FK_Tbl_Autenticacion_Tbl_Usuario" FromRole="Tbl_Usuario" ToRole="Tbl_Autenticacion" />
+  </EntityType>
+  <Association Name="FK_Tbl_Autenticacion_Tbl_Rol">
+    <End Role="Tbl_Rol" Type="Self.Tbl_Rol" Multiplicity="1" />
+    <End Role="Tbl_Autenticacion" Type="Self.Tbl_Autenticacion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tbl_Rol">
+        <PropertyRef Name="Id_Rol" />
+      </Principal>
+      <Dependent Role="Tbl_Autenticacion">
+        <PropertyRef Name="Id_Rol" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Tbl_Autenticacion_Tbl_Usuario">
+    <End Role="Tbl_Usuario" Type="Self.Tbl_Usuario" Multiplicity="1" />
+    <End Role="Tbl_Autenticacion" Type="Self.Tbl_Autenticacion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tbl_Usuario">
+        <PropertyRef Name="Id_Usuario" />
+      </Principal>
+      <Dependent Role="Tbl_Autenticacion">
+        <PropertyRef Name="Id_Usuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Db_ColegioEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Tbl_Autenticacion" EntityType="Self.Tbl_Autenticacion" />
+    <EntitySet Name="Tbl_Rol" EntityType="Self.Tbl_Rol" />
+    <EntitySet Name="Tbl_Usuario" EntityType="Self.Tbl_Usuario" />
+    <AssociationSet Name="FK_Tbl_Autenticacion_Tbl_Rol" Association="Self.FK_Tbl_Autenticacion_Tbl_Rol">
+      <End Role="Tbl_Rol" EntitySet="Tbl_Rol" />
+      <End Role="Tbl_Autenticacion" EntitySet="Tbl_Autenticacion" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Tbl_Autenticacion_Tbl_Usuario" Association="Self.FK_Tbl_Autenticacion_Tbl_Usuario">
+      <End Role="Tbl_Usuario" EntitySet="Tbl_Usuario" />
+      <End Role="Tbl_Autenticacion" EntitySet="Tbl_Autenticacion" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

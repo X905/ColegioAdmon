@@ -1,0 +1,74 @@
+﻿@*<div class="box box-info">
+        <div class="box-header with-border">
+            <h3 class="box-title">Horizontal Form</h3>
+        </div>
+        <!-- /.box-header -->
+        <!-- form start -->
+        <form class="form-horizontal" action="@Url.Action("Login","Autenticacion")" method="post">
+            <div class="box-body">
+                <div class="form-group">
+                    <label for="inputEmail3" class="col-sm-2 control-label">Email/Usuario</label>
+
+                    <div class="col-sm-10">
+                        <input type="email" class="form-control" name="usuario" id="inputEmail3" placeholder="Email">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputPassword3" class="col-sm-2 control-label">Password</label>
+
+                    <div class="col-sm-10">
+                        <input type="password" class="form-control" name="password" id="inputPassword3" placeholder="Password">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <div class="checkbox">
+                            <label>
+                                <input name="remember" type="checkbox"> Remember me
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /.box-body -->
+            <div class="box-footer">
+                <button type="submit" class="btn btn-info pull-right">Ingresar</button>
+            </div>
+            <!-- /.box-footer -->
+        </form>
+    </div>*@
+
+<div class="login-box">
+    <div class="login-logo">
+        <a href="../../index2.html"><b>C</b>OLEGIO</a>
+    </div>
+    <!-- /.login-logo -->
+    <div class="login-box-body">
+        <p class="login-box-msg">Iniciar sesión</p>
+
+        <form action="@Url.Action("Login","Autenticacion")" method="post">
+            <div class="form-group has-feedback">
+                <input type="email" class="form-control" placeholder="Email/Usuario">
+                <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+            </div>
+            <div class="form-group has-feedback">
+                <input type="password" class="form-control" placeholder="Password">
+                <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+            </div>
+            <div class="row">
+                
+                <!-- /.col -->
+                <div class="col-md-12">
+                    <button type="submit" class="btn btn-primary btn-block btn-flat">Sign In</button>
+                </div>
+                <!-- /.col -->
+            </div>
+        </form>
+
+        
+        <!-- /.social-auth-links -->
+
+
+    </div>
+    <!-- /.login-box-body -->
+</div>

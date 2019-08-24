@@ -1,0 +1,134 @@
+﻿@model IEnumerable<ColegioAdmon.Models.Entity.UsuarioEntity>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="box">
+    <div class="box-header">
+        <h3 class="box-title">Usuarios</h3>
+    </div>
+    <!-- /.box-header -->
+    <div class="box-body">
+        <div id="example1_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
+            <div class="col-sm-12">
+                <button style="" type="button" class="btn bg-olive btn-flat margin">.btn.bg-olive.btn-flat</button>
+                <table id="example1" class="table table-bordered table-striped dataTable" role="grid" aria-describedby="example1_info">
+                    <thead>
+                        <tr role="row">
+                            <th class="sorting_asc">
+                                @Html.DisplayNameFor(model => model.NombreUsuario)
+                            </th>
+                            <th class="sorting">
+                                @Html.DisplayNameFor(model => model.ApellidoUsuario)
+                            </th>
+                            <th class="sorting">
+                                @Html.DisplayNameFor(model => model.Usuario)
+                            </th>
+                            <th class="sorting">
+                                @Html.DisplayNameFor(model => model.Clave)
+                            </th>
+                            <th class="sorting">
+                                @Html.DisplayNameFor(model => model.Id_Rol)
+                            </th>
+                           
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                        <tr role="row">
+                            <td class="sorting_1">
+                                @Html.DisplayFor(modelItem => item.NombreUsuario)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ApellidoUsuario)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Usuario)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Clave)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Id_Rol)
+
+                            </td>
+                            <th >
+                                <div class="dropdown">
+                                    <button type="button" id="dropdownOpciones" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="btn-sm bg-navy btn-flat dropdown-toggle"><span class="ion ion-android-create"></span>Opciones</button>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownOpciones">
+                                        <button class="dropdown-item">Ver</button>
+                                        <button class="dropdown-item">Editar</button>
+                                        <button class="dropdown-item">Eliminar</button>
+                                    </div>
+                                </div>
+                            </th>
+                        </tr>
+                        }
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <th rowspan="1" colspan="1">
+                                @Html.DisplayNameFor(model => model.NombreUsuario)
+                            </th>
+                            <th rowspan="1" colspan="1">
+                                @Html.DisplayNameFor(model => model.ApellidoUsuario)
+                            </th>
+                            <th rowspan="1" colspan="1">
+                                @Html.DisplayNameFor(model => model.Usuario)
+                            </th>
+                            <th rowspan="1" colspan="1">
+                                @Html.DisplayNameFor(model => model.Clave)
+                            </th>
+                            <th rowspan="1" colspan="1">
+                                @Html.DisplayNameFor(model => model.Id_Rol)
+                            </th>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </div>
+    </div>
+    <!-- /.box-body -->
+
+@section Scripts{
+    <script src="~/Components/datatables.net/js/jquery.dataTables.min.js"></script>
+    <script src="~/Components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+
+    <script>
+      $(function () {
+          $('#example1').DataTable({
+              language: {
+                  search: "Buscar",
+                  lengthMenu: "Mostrar _MENU_ registros",
+                  zeroRecords: "No se encontraron registros",
+                  emptyTable: "Ningún dato disponible en esta tabla",
+                  info: "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+                  infoEmpty: "Mostrando registros del 0 al 0 de un total de 0 registros",
+                  infoFiltered: "(filtrado de un total de _MAX_ registros)",
+                  loadingRecords: "Cargando",
+                  paginate: {
+                      first: "Primero",
+                      last: "Ultimo",
+                      next: "siguiente",
+                      previous: "Anterior"
+                  },
+                  aria: {
+                      sortAscending: ": Activar para ordenar la columna de manera ascendente",
+                      sortDescending: ": Activar para ordenar la columna de manera descendente"
+                  }
+              }
+          }); 
+        $('#example2').DataTable({
+          'paging'      : true,
+          'lengthChange': false,
+          'searching'   : false,
+          'ordering'    : true,
+          'info'        : true,
+          'autoWidth'   : false
+        })
+      })
+    </script>
+}

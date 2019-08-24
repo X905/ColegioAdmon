@@ -1,0 +1,207 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Db_ColegioModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Tbl_Autenticacion">
+          <Key>
+            <PropertyRef Name="Id_Autenticacion" />
+          </Key>
+          <Property Name="Id_Autenticacion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Usuario" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Clave" Type="char" MaxLength="64" Nullable="false" />
+          <Property Name="Id_Usuario" Type="int" Nullable="false" />
+          <Property Name="Id_Rol" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tbl_Rol">
+          <Key>
+            <PropertyRef Name="Id_Rol" />
+          </Key>
+          <Property Name="Id_Rol" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Rol" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tbl_Usuario">
+          <Key>
+            <PropertyRef Name="Id_Usuario" />
+          </Key>
+          <Property Name="Id_Usuario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NombreUsuario" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ApellidoUsuario" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Sexo" Type="bit" Nullable="false" />
+          <Property Name="Edad" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Tbl_Autenticacion_Tbl_Rol">
+          <End Role="Tbl_Rol" Type="Self.Tbl_Rol" Multiplicity="1" />
+          <End Role="Tbl_Autenticacion" Type="Self.Tbl_Autenticacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Rol">
+              <PropertyRef Name="Id_Rol" />
+            </Principal>
+            <Dependent Role="Tbl_Autenticacion">
+              <PropertyRef Name="Id_Rol" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_Autenticacion_Tbl_Usuario">
+          <End Role="Tbl_Usuario" Type="Self.Tbl_Usuario" Multiplicity="1" />
+          <End Role="Tbl_Autenticacion" Type="Self.Tbl_Autenticacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Usuario">
+              <PropertyRef Name="Id_Usuario" />
+            </Principal>
+            <Dependent Role="Tbl_Autenticacion">
+              <PropertyRef Name="Id_Usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Db_ColegioModelStoreContainer">
+          <EntitySet Name="Tbl_Autenticacion" EntityType="Self.Tbl_Autenticacion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_Rol" EntityType="Self.Tbl_Rol" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_Usuario" EntityType="Self.Tbl_Usuario" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Tbl_Autenticacion_Tbl_Rol" Association="Self.FK_Tbl_Autenticacion_Tbl_Rol">
+            <End Role="Tbl_Rol" EntitySet="Tbl_Rol" />
+            <End Role="Tbl_Autenticacion" EntitySet="Tbl_Autenticacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_Autenticacion_Tbl_Usuario" Association="Self.FK_Tbl_Autenticacion_Tbl_Usuario">
+            <End Role="Tbl_Usuario" EntitySet="Tbl_Usuario" />
+            <End Role="Tbl_Autenticacion" EntitySet="Tbl_Autenticacion" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Db_ColegioModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Tbl_Autenticacion">
+          <Key>
+            <PropertyRef Name="Id_Autenticacion" />
+          </Key>
+          <Property Name="Id_Autenticacion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Usuario" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Clave" Type="String" MaxLength="64" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="Id_Usuario" Type="Int32" Nullable="false" />
+          <Property Name="Id_Rol" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Tbl_Rol" Relationship="Self.FK_Tbl_Autenticacion_Tbl_Rol" FromRole="Tbl_Autenticacion" ToRole="Tbl_Rol" />
+          <NavigationProperty Name="Tbl_Usuario" Relationship="Self.FK_Tbl_Autenticacion_Tbl_Usuario" FromRole="Tbl_Autenticacion" ToRole="Tbl_Usuario" />
+        </EntityType>
+        <EntityType Name="Tbl_Rol">
+          <Key>
+            <PropertyRef Name="Id_Rol" />
+          </Key>
+          <Property Name="Id_Rol" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Rol" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Tbl_Autenticacion" Relationship="Self.FK_Tbl_Autenticacion_Tbl_Rol" FromRole="Tbl_Rol" ToRole="Tbl_Autenticacion" />
+        </EntityType>
+        <EntityType Name="Tbl_Usuario">
+          <Key>
+            <PropertyRef Name="Id_Usuario" />
+          </Key>
+          <Property Name="Id_Usuario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NombreUsuario" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ApellidoUsuario" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Sexo" Type="Boolean" Nullable="false" />
+          <Property Name="Edad" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Tbl_Autenticacion" Relationship="Self.FK_Tbl_Autenticacion_Tbl_Usuario" FromRole="Tbl_Usuario" ToRole="Tbl_Autenticacion" />
+        </EntityType>
+        <Association Name="FK_Tbl_Autenticacion_Tbl_Rol">
+          <End Role="Tbl_Rol" Type="Self.Tbl_Rol" Multiplicity="1" />
+          <End Role="Tbl_Autenticacion" Type="Self.Tbl_Autenticacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Rol">
+              <PropertyRef Name="Id_Rol" />
+            </Principal>
+            <Dependent Role="Tbl_Autenticacion">
+              <PropertyRef Name="Id_Rol" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_Autenticacion_Tbl_Usuario">
+          <End Role="Tbl_Usuario" Type="Self.Tbl_Usuario" Multiplicity="1" />
+          <End Role="Tbl_Autenticacion" Type="Self.Tbl_Autenticacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Usuario">
+              <PropertyRef Name="Id_Usuario" />
+            </Principal>
+            <Dependent Role="Tbl_Autenticacion">
+              <PropertyRef Name="Id_Usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Db_ColegioEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Tbl_Autenticacion" EntityType="Self.Tbl_Autenticacion" />
+          <EntitySet Name="Tbl_Rol" EntityType="Self.Tbl_Rol" />
+          <EntitySet Name="Tbl_Usuario" EntityType="Self.Tbl_Usuario" />
+          <AssociationSet Name="FK_Tbl_Autenticacion_Tbl_Rol" Association="Self.FK_Tbl_Autenticacion_Tbl_Rol">
+            <End Role="Tbl_Rol" EntitySet="Tbl_Rol" />
+            <End Role="Tbl_Autenticacion" EntitySet="Tbl_Autenticacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_Autenticacion_Tbl_Usuario" Association="Self.FK_Tbl_Autenticacion_Tbl_Usuario">
+            <End Role="Tbl_Usuario" EntitySet="Tbl_Usuario" />
+            <End Role="Tbl_Autenticacion" EntitySet="Tbl_Autenticacion" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Db_ColegioModelStoreContainer" CdmEntityContainer="Db_ColegioEntities">
+          <EntitySetMapping Name="Tbl_Autenticacion">
+            <EntityTypeMapping TypeName="Db_ColegioModel.Tbl_Autenticacion">
+              <MappingFragment StoreEntitySet="Tbl_Autenticacion">
+                <ScalarProperty Name="Id_Autenticacion" ColumnName="Id_Autenticacion" />
+                <ScalarProperty Name="Usuario" ColumnName="Usuario" />
+                <ScalarProperty Name="Clave" ColumnName="Clave" />
+                <ScalarProperty Name="Id_Usuario" ColumnName="Id_Usuario" />
+                <ScalarProperty Name="Id_Rol" ColumnName="Id_Rol" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_Rol">
+            <EntityTypeMapping TypeName="Db_ColegioModel.Tbl_Rol">
+              <MappingFragment StoreEntitySet="Tbl_Rol">
+                <ScalarProperty Name="Id_Rol" ColumnName="Id_Rol" />
+                <ScalarProperty Name="Rol" ColumnName="Rol" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_Usuario">
+            <EntityTypeMapping TypeName="Db_ColegioModel.Tbl_Usuario">
+              <MappingFragment StoreEntitySet="Tbl_Usuario">
+                <ScalarProperty Name="Id_Usuario" ColumnName="Id_Usuario" />
+                <ScalarProperty Name="NombreUsuario" ColumnName="NombreUsuario" />
+                <ScalarProperty Name="ApellidoUsuario" ColumnName="ApellidoUsuario" />
+                <ScalarProperty Name="Sexo" ColumnName="Sexo" />
+                <ScalarProperty Name="Edad" ColumnName="Edad" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
